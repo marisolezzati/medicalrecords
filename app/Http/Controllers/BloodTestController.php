@@ -37,7 +37,9 @@ class BloodTestController extends Controller
      */
     public function create()
     {
-        return view('dashboard', ['measures'=>Measure::orderBy('name')->get()]);
+        $measures= Measure::orderBy('name')->get();
+        $bloodTest= BloodTest::where('user_id', auth()->user()->id)->get();
+        return view('dashboard', ['measures'=>$measures, 'bloodtests'=>$bloodTest]);
     }
 
 

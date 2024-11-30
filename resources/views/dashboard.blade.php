@@ -33,6 +33,36 @@
                             <x-primary-button>{{ __('Save') }}</x-primary-button>
                         </form>
                     </div>
+
+                    Tests list:
+                    <table class="list">
+                        <thead>
+                            <tr class="item">
+                                <td>Measure</td>
+                                <td>Unit</td>
+                                <td>Value</td>
+                                <td>Evaluation*</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @php
+                            $total=0;
+                        @endphp
+                        @foreach($bloodtests as $bloodtest)
+                            <tr class="item">
+                                <td>{{$bloodtest->description()}}</td>
+                                <td class="numericItem">{{$bloodtest->value}}</td>
+                                <td>{{$bloodtest->unit()}}</td>
+                                <td class="numericItem">
+                                    
+                                    @php
+                                   dd($bloodtest->minValue)
+                                    @endphp              
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
