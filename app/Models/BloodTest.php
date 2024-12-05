@@ -11,6 +11,7 @@ class BloodTest extends Model
         'measure_id',
         'user_id',
         'age',
+        'date',
     ];
 
     public function trucks(){
@@ -27,7 +28,7 @@ class BloodTest extends Model
         return Measure::find($this->measure_id)->unit;
     }
 
-    /*public function minValue()
+    public function minValue()
     {
         $normalValue = NormalValue::where([
             ['measure_id', '=', $this->measure_id],
@@ -37,9 +38,23 @@ class BloodTest extends Model
                 return $query
                 ->where('age_to', '>=', $this->age)
                 ->orWhere('age_to', '=', null);
-            })->get()->first();
-            dd($normalValue);
+            })->get()->first()->min_value;
+            
         return $normalValue;
     }
-        */
+
+    public function maxValue()
+    {
+        $normalValue = NormalValue::where([
+            ['measure_id', '=', $this->measure_id],
+            ['age_from', '<=', $this->age],
+        ])->where(
+            function($query) {
+                return $query
+                ->where('age_to', '>=', $this->age)
+                ->orWhere('age_to', '=', null);
+            })->get()->first()->max_value;
+        
+        return $normalValue;
+    }
 }

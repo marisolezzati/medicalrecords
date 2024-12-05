@@ -13,7 +13,17 @@ class BloodTestController extends Controller
      */
     public function index()
     {
-        //
+        $filerParams = $_GET;
+        $bloodTest= BloodTest::where('user_id', auth()->user()->id)
+        ->when(!empty($filerParams["date"]), function($query) use ($filerParams){
+            return $query->where('date', $filerParams["date"]);
+        })
+        ->when(!empty($filerParams["measure_id"]), function($query) use ($filerParams){
+            return $query->where('measure_id', $filerParams["measure_id"]);
+        })
+        ->get();
+        $measures= Measure::orderBy('name')->get();
+        return view('bloodtest.index', ['measures'=>$measures, 'bloodtests'=>$bloodTest]);
     }
 
    
@@ -24,12 +34,13 @@ class BloodTestController extends Controller
     {
         $data = $request->validate([
             'value'=> ['required','numeric', 'min:0'],
+            'date'=> ['required'],
         ]);
         $data['age'] = $request->user()->age;
         $data['user_id'] = $request->user()->id;
         $data['measure_id'] = intval($request->measure_id);
         $bloodtest = BloodTest::create($data);
-        return to_route('bloodtest.create');
+        return to_route('bloodtest.index');
     }
 
     /**
@@ -38,8 +49,7 @@ class BloodTestController extends Controller
     public function create()
     {
         $measures= Measure::orderBy('name')->get();
-        $bloodTest= BloodTest::where('user_id', auth()->user()->id)->get();
-        return view('dashboard', ['measures'=>$measures, 'bloodtests'=>$bloodTest]);
+        return view('bloodtest.create', ['measures'=>$measures]);
     }
 
 

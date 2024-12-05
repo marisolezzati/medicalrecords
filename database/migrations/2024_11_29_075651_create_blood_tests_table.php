@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('blood_tests', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
             $table->foreignId('measure_id')->constrained('measures'); 
             $table->foreignId('user_id')->constrained('users'); 
             $table->integer('age'); // in months at the time of the blood sample

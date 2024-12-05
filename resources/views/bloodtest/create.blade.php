@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Create') }}
         </h2>
     </x-slot>
 
@@ -13,6 +13,7 @@
                         Add new blood test:
                         <form action="{{ route('bloodtest.store') }}" method="POST" >
                             @csrf
+                            Date: <input name="date" type="date" required>
                             Measure <select name="measure_id" required>
                                 <option value="">-</option>
                                 @foreach ($measures as $measure)
@@ -26,5 +27,5 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>   
 </x-app-layout>

@@ -5,7 +5,6 @@ use App\Http\Controllers\BloodTestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 
-    //[BloodTestController::class, 'create']
     function () {return view('dashboard');}
 )->middleware(['auth', 'verified'])->name('dashboard');
 
