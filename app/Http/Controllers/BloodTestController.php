@@ -21,7 +21,7 @@ class BloodTestController extends Controller
         ->when(!empty($filerParams["measure_id"]), function($query) use ($filerParams){
             return $query->where('measure_id', $filerParams["measure_id"]);
         })
-        ->get();
+        ->orderBy('date')->get();
         $measures= Measure::orderBy('name')->get();
         return view('bloodtest.index', ['measures'=>$measures, 'bloodtests'=>$bloodTest]);
     }

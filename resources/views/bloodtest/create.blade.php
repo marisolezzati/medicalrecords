@@ -23,6 +23,9 @@
                             Value: <input name="value" required>
                             <x-primary-button>{{ __('Save') }}</x-primary-button>
                         </form>
+                        <form action="{{ route('bloodtest.index') }}" method="GET" >
+                            <x-primary-button>{{ __('Cancel') }}</x-primary-button>
+                        </form>
                     </div>
                 </div>
             </div>
