@@ -50,7 +50,7 @@
                         <tbody>
                         @php
                         $graphTitle ="";
-                        if(!empty($_GET['measure_id'] && count($bloodtests)>0)){
+                        if(!empty($_GET['measure_id']) && count($bloodtests)>0){
                             $measureName = $bloodtests[0]->description();
                             $minValue = $bloodtests[0]->minValue();
                             $maxValue = $bloodtests[0]->maxValue();
