@@ -12,7 +12,8 @@ class MeasureController extends Controller
      */
     public function index()
     {
-        //
+        $measures= Measure::orderBy('name')->get();
+        return view('measure.index', ['measures'=>$measures]);
     }
 
     /**

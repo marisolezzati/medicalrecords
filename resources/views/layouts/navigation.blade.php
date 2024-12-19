@@ -16,6 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('bloodtest.index')" :active="request()->routeIs('bloodtest.index')">
+                    {{ __('My tests') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -41,6 +47,12 @@
                         <x-dropdown-link :href="route('bloodtest.index')">
                             {{ __('My tests') }}
                         </x-dropdown-link>
+
+                        @if(Auth::user()->admin)
+                            <x-dropdown-link :href="route('measure.index')">
+                                {{ __('Measures') }}
+                            </x-dropdown-link>
+                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

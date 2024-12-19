@@ -13,11 +13,7 @@ class BloodTest extends Model
         'age',
         'date',
     ];
-
-    public function trucks(){
-        return $this->hasMany(Truck::class);
-    }
-
+    
     public function description()
     {
         return Measure::find($this->measure_id)->description;
